@@ -6,7 +6,7 @@ fi
 
 sed -i "s|bind-address\s*=\s*127.0.0.1|bind-address = 0.0.0.0|g" /etc/mysql/mariadb.conf.d/50-server.cnf
 
-mysqld_safe --datadir="$/var/lib/mysql" &
+mysqld_safe --datadir="/var/lib/mysql" &
 sleep 10
 
 
@@ -23,5 +23,8 @@ mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_ADMIN_USER}'@'
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_ADMIN_USER}'@'%' WITH GRANT OPTION;"
 
 mysql -e "FLUSH PRIVILEGES;"
+
+echo "finishing configurating process.."
+
 
 wait

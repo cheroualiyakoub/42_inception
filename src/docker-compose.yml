@@ -7,5 +7,25 @@ services:
       context: ./requirements/nginx
     ports:
       - "443:443"
+    networks:
+      - inception
     restart: always
-  
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb
+    build:
+      context: ./requirements/mariadb
+    ports:
+      - "3306:3306"
+    networks:
+      - inception
+    env_file:
+      - .env
+    restart: always
+
+networks:
+  inception:
+    driver: bridge
+
+
