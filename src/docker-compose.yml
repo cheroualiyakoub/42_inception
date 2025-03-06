@@ -7,6 +7,8 @@ services:
       context: ./requirements/nginx
     ports:
       - "443:443"
+    volumes:
+      - wordpress_db:/var/lib/mysql
     networks:
       - inception
     restart: always
@@ -18,14 +20,42 @@ services:
       context: ./requirements/mariadb
     ports:
       - "3306:3306"
+    volumes:
+      - wordpress_files:/var/www/html
     networks:
       - inception
     env_file:
       - .env
+    restart: always
+  
+  wordpress:
+    container_name: wordpress
+    image: wordpress
+    build:
+      context: ./requirements/wordpress
+    env_file:
+      - .env
+    volumes:
+      - wordpress_files:/var/www/html
+    networks:
+      - inception
     restart: always
 
 networks:
   inception:
     driver: bridge
 
+volumes:
+  wordpress_db:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ycheroua/data/mariadb
+      o: bind
+  wordpress_files:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/ycheroua/data/wordpress
+      o: bind
 
