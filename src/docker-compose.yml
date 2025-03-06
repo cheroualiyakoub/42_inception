@@ -50,12 +50,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/ycheroua/data/mariadb
+      device: /home/ycheroua/goinfre/mariadb
       o: bind
   wordpress_files:
     driver: local
     driver_opts:
       type: none
-      device: /home/ycheroua/data/wordpress
+      device: /home/ycheroua/goinfre/wordpress
       o: bind
 
