@@ -10,4 +10,4 @@ RUN chmod +x /usr/local/bin/setup.sh
 
 EXPOSE 3306
 
-CMD ["sh", "/usr/local/bin/setup.sh"]
+CMD ["bash", "/usr/local/bin/setup.sh"]

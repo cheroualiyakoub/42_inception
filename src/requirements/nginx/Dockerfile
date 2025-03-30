@@ -10,10 +10,10 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 	-subj "/C=DE/ST=Baden-württemberg/L=Heilbronn/O=42Heilbronn/OU=Heilb/CN=localhost"
 
 
-COPY ./conf/index.html /var/www/html
+#COPY ./conf/index.html /var/www/html
 COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 443
 
 
-CMD ["nginx", "-g", "daemon off;"].
+CMD ["nginx", "-g", "daemon off;"]

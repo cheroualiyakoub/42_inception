@@ -8,7 +8,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress_db:/var/lib/mysql
+      - wordpress_files:/var/www/html
     networks:
       - inception
     restart: always
@@ -21,7 +21,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - wordpress_files:/var/www/html
+      - wordpress_db:/var/lib/mysql
     networks:
       - inception
     env_file:
@@ -35,6 +35,8 @@ services:
       context: ./requirements/wordpress
     env_file:
       - .env
+    ports:
+      - "9000:9000"
     volumes:
       - wordpress_files:/var/www/html
     networks:

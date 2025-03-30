@@ -4,8 +4,9 @@ until mysqladmin ping -h "${MYSQL_DB_HOST}" -u root --password="${MYSQL_ROOT_PAS
     sleep 1
 done
 
+echo "Maria db is ready!"
 
-if [ ! -f /var/www/html/wp-config.php ]; then
+if [ ! -f "/var/www/html/wp-config.php" ]; then
     echo "Creating wordpress config file..."
     wp config create --path=/var/www/html \
         --dbname="${MYSQL_DATABASE}" \

@@ -21,7 +21,7 @@ RUN sed -i "s|;listen.owner = www-data|listen.owner = www-data|g" /etc/php/7.4/f
 RUN mkdir -p /run/php && chown -R www-data:www-data /run/php
 
 
-COPY ./conf/setup.sh /usr/local/bin/setup.sh
+COPY ./conf/backup.sh /usr/local/bin/setup.sh
 
 RUN chmod +x /usr/local/bin/setup.sh
 
@@ -29,4 +29,4 @@ EXPOSE 9000
 
 WORKDIR /var/www/html
 
-CMD ["/bin/bash", "-c", "/usr/local/bin/init_wp.sh && php-fpm7.4 --nodaemonize"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/setup.sh && php-fpm7.4 --nodaemonize"]
