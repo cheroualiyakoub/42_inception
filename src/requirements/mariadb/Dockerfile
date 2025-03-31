@@ -1,13 +1,12 @@
-FROM debian:bullseye
+FROM mariadb:latest
 
-RUN apt-get update && apt-get install -y mariadb-server \
-	 && apt-get clean
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    bash \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY ./conf/setup.sh /usr/local/bin/setup.sh
-
 RUN chmod +x /usr/local/bin/setup.sh
-
 
 EXPOSE 3306
 
-CMD ["bash", "/usr/local/bin/setup.sh"]
+ENTRYPOINT ["/usr/local/bin/setup.sh"]
