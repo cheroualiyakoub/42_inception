@@ -1,7 +1,8 @@
+version: "3.8"
+
 services:
 
   nginx:
-    container_name: nginx
     image: nginx
     build:
       context: ./requirements/nginx
@@ -12,9 +13,10 @@ services:
     networks:
       - inception
     restart: always
+    depends_on:
+      - wordpress
 
   mariadb:
-    container_name: mariadb
     image: mariadb
     build:
       context: ./requirements/mariadb
@@ -27,9 +29,8 @@ services:
     env_file:
       - .env
     restart: always
-  
+
   wordpress:
-    container_name: wordpress
     image: wordpress
     build:
       context: ./requirements/wordpress
@@ -42,6 +43,8 @@ services:
     networks:
       - inception
     restart: always
+    depends_on:
+      - mariadb
 
 networks:
   inception:
@@ -54,10 +57,10 @@ volumes:
       type: none
       device: /home/ycheroua/goinfre/mariadb
       o: bind
+
   wordpress_files:
     driver: local
     driver_opts:
       type: none
       device: /home/ycheroua/goinfre/wordpress
       o: bind
-
