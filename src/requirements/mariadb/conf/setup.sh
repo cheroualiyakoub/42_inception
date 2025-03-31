@@ -22,7 +22,7 @@ configure_mariadb() {
 
 start_mysql() {
     echo "Starting MariaDB..."
-    mysqld_safe --datadir="$DB_DIR" &
+     mysqld_safe --datadir="$DB_DIR" &
 
     local retries=30
     until mysqladmin ping &>/dev/null || [ $retries -eq 0 ]; do

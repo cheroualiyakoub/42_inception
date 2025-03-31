@@ -1,8 +1,7 @@
-FROM mariadb:latest
+FROM debian:bullseye
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    bash \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y mariadb-server \
+    && apt-get clean
 
 COPY ./conf/setup.sh /usr/local/bin/setup.sh
 RUN chmod +x /usr/local/bin/setup.sh
