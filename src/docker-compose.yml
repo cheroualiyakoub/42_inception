@@ -3,6 +3,7 @@ version: "3.8"
 services:
 
   nginx:
+    
     image: nginx
     build:
       context: ./requirements/nginx
@@ -17,6 +18,7 @@ services:
       - wordpress
 
   mariadb:
+    container_name: mariadb
     image: mariadb
     build:
       context: ./requirements/mariadb
@@ -31,6 +33,7 @@ services:
     restart: always
 
   wordpress:
+    container_name: wordpress
     image: wordpress
     build:
       context: ./requirements/wordpress
