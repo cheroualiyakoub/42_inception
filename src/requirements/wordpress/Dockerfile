@@ -13,7 +13,8 @@ RUN apt-get update && \
     apt-get clean
 
 # Set up WordPress
-RUN wget https://wordpress.org/latest.tar.gz && \
+RUN mkdir -p /var/www/html && \
+	wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz && \
     mv wordpress/* /var/www/html/ && \
     rm -rf wordpress latest.tar.gz
