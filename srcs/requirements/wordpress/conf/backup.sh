@@ -7,12 +7,21 @@ log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
 }
 
-wait_for_mariadb() {
+wait_for_mariadb()
+{
     log_message "Waiting for MariaDB to start..."
     until mysqladmin ping -h "${MYSQL_DB_HOST}" -u root --password="${MYSQL_ROOT_PASSWORD}" --silent; do
         sleep 1
     done
     log_message "MariaDB is ready!"
+}
+
+check_admin_name()
+{
+    if echo "${WORDPRESS_ADMIN_USER}" | grep -i -qE "admin|administrator|Admin"; then
+        echo "Error: WORDPRESS_ADMIN_USER contains forbidden substrings (admin, administrator, Admin)."
+        exit 1
+    fi
 }
 
 configure_wordpress() {
@@ -59,6 +68,7 @@ create_wp_user() {
 }
 
 wait_for_mariadb
+check_admin_name
 configure_wordpress
 install_wordpress
 create_wp_user
